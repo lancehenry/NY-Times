@@ -2,10 +2,10 @@
 // ===================================================
 var apiKey = "d11361d2415e42dba87af6d021ea375b";
 
-var queryTerm  = "";
+var queryTerm = "";
 var numResults = 0;
-var startYear  = 0;
-var endYear    = 0;
+var startYear = 0;
+var endYear = 0;
 
 // URL
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + "api-key=" + apiKey;
@@ -21,10 +21,16 @@ function runQuery(numArticles, queryURL) {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).done(function(NYTData) {
-        
+    }).done(function (NYTData) {
+        for (var i = 0; i < NYTData.response.docs.length; i++) {
+            console.log(NYTData.response.docs[i].headline.main);
+            console.log(NYTData.response.docs[i].section_name);
+            console.log(NYTData.response.docs[i].pub_date);
+            console.log(NYTData.response.docs[i].web_url);
+        }
         // Logging to console
         console.log(queryURL);
+        console.log(numArticles);
         console.log(NYTData);
     })
 }
@@ -32,40 +38,40 @@ function runQuery(numArticles, queryURL) {
 // Main processes
 // ===================================================
 
-$("#searchBtn").on("click", function(){
+$("#searchBtn").on("click", function () {
 
+    // Get the Search Term
     queryTerm = $("#search").val().trim();
-    console.log(queryTerm);
 
     // Add in the Search Term
     var newURL = queryURL + "&q=" + queryTerm;
-    console.log(newURL);
 
     // Get the Number of Records
-    numResults = $("")
+    numResults = $("#numRecords").val();
 
     // Get the Start Year and End Year
     startYear = $("#startYear").val().trim();
     endYear = $("#endYear").val().trim();
 
-
     if (parseInt(startYear)) {
+        // Add the necessary fields
         startYear = startYear + "0101";
+        // Add the date information to the URL
         newURL = newURL + "&begin_date=" + startYear;
     }
 
     if (parseInt(endYear)) {
+        // Add the necessary fields
         endYear = endYear + "0101";
+        // Add the date information to the URL
         newURL = newURL + "&end_date=" + endYear;
     }
 
-    // Add the date information to the URL
-    
     console.log(newURL);
 
     // Send the AJAX call the newly assembled URL
-    runQuery(10, newURL);
-    
+    runQuery(numResults, newURL);
+
     return false;
 })
 
