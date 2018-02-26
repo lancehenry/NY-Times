@@ -37,9 +37,32 @@ $("#searchBtn").on("click", function(){
     queryTerm = $("#search").val().trim();
     console.log(queryTerm);
 
+    // Add in the Search Term
     var newURL = queryURL + "&q=" + queryTerm;
     console.log(newURL);
+
+    // Get the Number of Records
+    numResults = $("")
+
+    // Get the Start Year and End Year
+    startYear = $("#startYear").val().trim();
+    endYear = $("#endYear").val().trim();
+
+
+    if (parseInt(startYear)) {
+        startYear = startYear + "0101";
+        newURL = newURL + "&begin_date=" + startYear;
+    }
+
+    if (parseInt(endYear)) {
+        endYear = endYear + "0101";
+        newURL = newURL + "&end_date=" + endYear;
+    }
+
+    // Add the date information to the URL
     
+    console.log(newURL);
+
     // Send the AJAX call the newly assembled URL
     runQuery(10, newURL);
     
