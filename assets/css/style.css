@@ -1,0 +1,9 @@
+.container .jumbotron {
+    border-radius: 0;
+    background-color: #380060;
+}
+
+.jumbotron h1 {
+    font-family: "Mukta Mahee", sans-serif;
+    color: #fff;
+}
