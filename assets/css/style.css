@@ -1,9 +1,14 @@
 .container .jumbotron {
-    border-radius: 0;
     background-color: #380060;
 }
 
-.jumbotron h1 {
+.jumbotron .heading {
     font-family: "Mukta Mahee", sans-serif;
+    color: #fff;
+    margin-left: 0.3em;
+    font-size: 5.7em;
+}
+
+.jumbotron .fa-newspaper {
     color: #fff;
 }
