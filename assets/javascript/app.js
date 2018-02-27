@@ -89,3 +89,8 @@ $("#searchBtn").on("click", function () {
 
     return false;
 })
+
+$("#clearBtn").on("click", function(){
+    $("#wellSection").empty();
+    $("form").trigger("reset");
+})
